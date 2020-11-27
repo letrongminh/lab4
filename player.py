@@ -17,13 +17,11 @@ class Player(pygame.sprite.Sprite):  # This class represents the bar at the bott
     def __init__(self, x, y):
 
         super().__init__()
-
-        # Set height, width
-        self.image = pygame.Surface([15, 15])
+        
+        self.image = pygame.Surface([15, 15]) # Set height, width
         self.image.fill(WHITE)
-
-        # Make our top-left corner the passed-in location.
-        self.rect = self.image.get_rect()
+        
+        self.rect = self.image.get_rect() # Make our top-left corner the passed-in location.
         self.rect.y = y
         self.rect.x = x
 
@@ -32,28 +30,22 @@ class Player(pygame.sprite.Sprite):  # This class represents the bar at the bott
         self.change_y += y
 
     def move(self, walls):  # Find a new position for the player
-        # Move left/right
-        self.rect.x += self.change_x
+        self.rect.x += self.change_x  # Move left or right
 
-        # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, walls, False)
         for block in block_hit_list:
-            # If we are moving right, set our right side to the left side of
-            # the item we hit
             if self.change_x > 0:
                 self.rect.right = block.rect.left
             else:
-                # Otherwise if we are moving left, do the opposite.
-                self.rect.left = block.rect.right
+                self.rect.left = block.rect.right # Otherwise if we are moving left, do the opposite.
 
-        # Move up/down
-        self.rect.y += self.change_y
+                
+        self.rect.y += self.change_y # Move up/down
 
-        # Check and see if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, walls, False)
         for block in block_hit_list:
 
-            # Reset our position based on the top/bottom of the object.
+            # Reset position based on the top/bottom of the object
             if self.change_y > 0:
                 self.rect.bottom = block.rect.top
             else:
