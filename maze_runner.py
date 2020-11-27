@@ -11,16 +11,13 @@ PURPLE = (255, 0, 255)
 
 
 def main():
-    # Call this function so the Pygame library can initialize itself
     pygame.init()
 
     screen = pygame.display.set_mode([800, 600])
 
-    # Set the title of the window
-    pygame.display.set_caption('Maze Runner')
+    pygame.display.set_caption('Maze Runner')    # Set the title of the window
 
-    # Create the player paddle object
-    player = Player(50, 50)
+    player = Player(50, 50) # create palyer
     moving_sprites = pygame.sprite.Group()
     moving_sprites.add(player)
 
@@ -44,8 +41,7 @@ def main():
 
     while not done:
 
-        # --- Event Processing ---
-        for event in pygame.event.get():
+        for event in pygame.event.get():        # Event Processing
             if event.type == pygame.QUIT:
                 done = True
 
@@ -69,9 +65,8 @@ def main():
                 if event.key == pygame.K_DOWN:
                     player.change_speed(0, -5)
 
-        # --- Game Logic ---
 
-        player.move(current_room.wall_list)
+        player.move(current_room.wall_list)        # Game Logic
 
         if player.rect.x < -15:
             if current_room_no == 0:
